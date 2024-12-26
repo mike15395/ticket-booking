@@ -4,7 +4,12 @@ body {
   display: flex;
   justify-content: center;
 }
-
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .auditorium {
   display: grid;
   gap: 10px;
@@ -13,8 +18,11 @@ body {
 .row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
+  border: 2px solid gray;
+  padding: 5px;
 }
 
 .row-label {

@@ -24,8 +24,15 @@ const url =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKxTigr4rJDtrreI4z4rJE0BLOdqJnWGOGxjNiUQTyPzw2P-eB8xXEeUJe8xaZZcQOZdqLaZjg98aU/pub?output=csv&gid=970453845";
 
 let bookedSeats = [];
+
+const loader = "<div>Loading...</div>";
+const main = document.querySelector(".main");
+
 async function getBookedSeats() {
+  // document.body.innerText = loader;
+
   bookedSeats = await fetchData();
+
   renderAuditorium(bookedSeats);
 }
 
@@ -82,8 +89,10 @@ function renderAuditorium(bookedSeats) {
 }
 
 async function fetchData() {
+  console.time("fetching api data");
   const response = await fetch(url);
   const data = await response.text();
+  console.timeEnd("fetching api data");
   console.log(data);
   const filteredData = parseCSV(data);
   console.log(filteredData, "filtered data");
