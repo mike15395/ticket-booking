@@ -45,7 +45,7 @@ main{
   display: flex;
   flex-direction: row-reverse;
   gap: 5px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .seat {
