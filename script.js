@@ -20,29 +20,63 @@ const rows = [
   { row: "S", seats: 44, price: 250 },
 ];
 
+const extraSpaceConfig = {
+  A: [9, 15],
+  B: [9, 16],
+  C: [10, 17],
+  D: [10, 18],
+  E: [10, 18],
+  F: [11, 20],
+  G: [11, 20],
+  H: [11, 21],
+  I: [12, 22],
+  J: [12, 23],
+  K: [13, 24],
+  L: [13, 25],
+  M: [14, 27],
+  N: [14, 27],
+  O: [15, 27],
+  P: [14, 26],
+  Q: [14, 27],
+  R: [15, 28],
+  S: [15, 28],
+  // Add other rows and their respective seat numbers here
+};
+
 const url =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKxTigr4rJDtrreI4z4rJE0BLOdqJnWGOGxjNiUQTyPzw2P-eB8xXEeUJe8xaZZcQOZdqLaZjg98aU/pub?output=csv&gid=970453845";
 
 let bookedSeats = [];
 
-const loader = "<div>Loading...</div>";
+const loader = document.getElementById("loader");
 const main = document.querySelector(".main");
+const auditorium = document.querySelector(".auditorium");
+const displayBookedCount = document.getElementById("booked-count");
+const displayAvailableCount = document.getElementById("available-count");
+const bookingContainer = document.querySelector(".booking-status");
 
 async function getBookedSeats() {
   // document.body.innerText = loader;
+  try {
+    loader.style.display = "block";
+    bookingContainer.style.display = "none";
 
-  bookedSeats = await fetchData();
-
-  renderAuditorium(bookedSeats);
+    bookedSeats = await fetchData();
+    renderAuditorium(bookedSeats);
+  } catch (error) {
+    console.log("Error fetching API data", error);
+  } finally {
+    loader.style.display = "none";
+    bookingContainer.style.display = "flex";
+    auditorium.style.display = "grid";
+  }
 }
 
 function renderAuditorium(bookedSeats) {
   const totalSeats = 665;
-  const auditorium = document.querySelector(".auditorium");
-  const displayBookedCount = document.getElementById("booked-count");
+
   displayBookedCount.innerHTML += " - " + bookedSeats.length + " Seats";
 
-  const displayAvailableCount = document.getElementById("available-count");
   displayAvailableCount.innerHTML +=
     " - " + parseInt(totalSeats - bookedSeats.length) + " Seats";
 
@@ -74,6 +108,14 @@ function renderAuditorium(bookedSeats) {
       );
 
       seat.classList.add(check?.length > 0 ? "booked" : "vacant");
+
+      // if (row === "A" && (i === 9 || i === 15)) {
+      //   seat.classList.add("extra-space");
+      // }
+
+      if (extraSpaceConfig[row] && extraSpaceConfig[row].includes(i)) {
+        seat.classList.add("extra-space");
+      }
 
       const tooltip = document.createElement("div");
       tooltip.classList.add("tooltip");

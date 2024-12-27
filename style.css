@@ -15,6 +15,16 @@ main{
   gap: 10px;
 }
 
+.stage{
+  width: 800px;
+  height: 60px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 50px;
+  font-size: xx-large;
+  margin-bottom: 10px;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -33,6 +43,7 @@ main{
 
 .seats {
   display: flex;
+  flex-direction: row-reverse;
   gap: 5px;
   flex-wrap: wrap;
 }
@@ -98,12 +109,43 @@ main{
 }
 .sample-book-container{
   display: flex;
-  gap:5px
+  gap:10px;
+  margin-bottom: 5px;
 }
 .booking-status{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 7px;
+}
+
+.seat.extra-space {
+  margin-right: 20px; /* Add extra space */
+}
+
+#loader {
+  display: none;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-bottom: 16px solid blue;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 @media (max-width: 768px) {
