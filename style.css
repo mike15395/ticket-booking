@@ -9,13 +9,21 @@ main{
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  
 }
 .auditorium {
   display: grid;
   gap: 10px;
+  width: 100%;
+  margin: 20px;
+  /* max-width: 800px; */
 }
 
 .stage{
+ 
   width: 800px;
   height: 60px;
   border: 1px solid black;
@@ -33,12 +41,16 @@ main{
   flex-wrap: wrap;
   border: 2px solid gray;
   padding: 5px;
+  width: auto;
+  
+
 }
 
 .row-label {
   font-weight: bold;
   margin-right: 10px;
   flex-shrink: 0;
+  
 }
 
 .seats {
@@ -149,6 +161,7 @@ main{
 }
 
 @media (max-width: 768px) {
+  .stage{width:600px}
   .seat {
     width: 20px;
     height: 20px;
@@ -166,6 +179,9 @@ main{
 }
 
 @media (max-width: 480px) {
+  .stage{
+    width:480px
+  }
   body {
     margin: 10px;
   }

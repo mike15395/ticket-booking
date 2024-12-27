@@ -40,7 +40,6 @@ const extraSpaceConfig = {
   Q: [14, 27],
   R: [15, 28],
   S: [15, 28],
-  // Add other rows and their respective seat numbers here
 };
 
 const url =
@@ -56,7 +55,6 @@ const displayAvailableCount = document.getElementById("available-count");
 const bookingContainer = document.querySelector(".booking-status");
 
 async function getBookedSeats() {
-  // document.body.innerText = loader;
   try {
     loader.style.display = "block";
     bookingContainer.style.display = "none";
@@ -93,12 +91,14 @@ function renderAuditorium(bookedSeats) {
     seatsDiv.classList.add("seats");
 
     for (let i = 1; i <= seats; i++) {
+      // const angle = -90 + (180 / (seats - 1)) * (i - 1); // Arc effect
       const seat = document.createElement("div");
       seat.classList.add("seat");
       seat.dataset.row = row;
       seat.dataset.seatNumber = i;
       seat.dataset.price = price;
       seat.textContent = i;
+      // seat.style.transform = `rotate(${angle}deg) translate(0, -100px)`; // Arc effect
 
       const check = bookedSeats.filter(
         (item) =>
