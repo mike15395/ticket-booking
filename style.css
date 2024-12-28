@@ -123,6 +123,20 @@ main{
   display: flex;
   gap:10px;
   margin-bottom: 5px;
+  font-size: x-large;
+}
+#check-button{
+  background-color: blue;
+  color: white;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: larger;
+  border: none;
+  cursor: pointer;
+  
 }
 .booking-status{
   display: flex;
@@ -136,6 +150,11 @@ main{
   margin-right: 20px; /* Add extra space */
 }
 
+td,th{
+ padding: 10px;
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ font-size: x-large;
+}
 #loader {
   display: none;
   border: 16px solid #f3f3f3;
@@ -146,6 +165,7 @@ main{
   height: 120px;
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
+  
 }
 
 

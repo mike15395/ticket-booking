@@ -42,6 +42,34 @@ const extraSpaceConfig = {
   S: [15, 28],
 };
 
+const tableData = [
+  {
+    floorType: "Ground",
+    rows: "A-B-C-D-E",
+    price: 1000,
+  },
+  {
+    floorType: "Ground",
+    rows: "F-G-H-I",
+    price: 700,
+  },
+  {
+    floorType: "Stall",
+    rows: "J-K-L",
+    price: 600,
+  },
+  {
+    floorType: "Stall",
+    rows: "M-N-O",
+    price: 500,
+  },
+  {
+    floorType: "Balcony",
+    rows: "P-Q-R-S",
+    price: 250,
+  },
+];
+
 const url =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQKxTigr4rJDtrreI4z4rJE0BLOdqJnWGOGxjNiUQTyPzw2P-eB8xXEeUJe8xaZZcQOZdqLaZjg98aU/pub?output=csv&gid=970453845";
 
@@ -53,6 +81,7 @@ const auditorium = document.querySelector(".auditorium");
 const displayBookedCount = document.getElementById("booked-count");
 const displayAvailableCount = document.getElementById("available-count");
 const bookingContainer = document.querySelector(".booking-status");
+const table = document.getElementById("details-table");
 
 async function getBookedSeats() {
   try {
@@ -60,6 +89,7 @@ async function getBookedSeats() {
     bookingContainer.style.display = "none";
 
     bookedSeats = await fetchData();
+    generateTableData(bookedSeats);
     renderAuditorium(bookedSeats);
   } catch (error) {
     console.log("Error fetching API data", error);
@@ -70,13 +100,63 @@ async function getBookedSeats() {
   }
 }
 
+function refreshPage() {
+  window.location.reload();
+}
+
+function generateTableData(bookedSeats) {
+  const ground1000 = bookedSeats.filter((item) => item.Price === "1000");
+  const ground700 = bookedSeats.filter((item) => item.Price === "700");
+  const stall600 = bookedSeats.filter((item) => item.Price === "600");
+  const stall500 = bookedSeats.filter((item) => item.Price === "500");
+  const balcony250 = bookedSeats.filter((item) => item.Price === "250");
+  tableData.forEach((item) => {
+    if (item.price === 1000) {
+      item.bookedCount = ground1000?.length;
+      item.vacantCount = 132 - ground1000?.length;
+    }
+    if (item.price === 700) {
+      item.bookedCount = ground700?.length;
+      item.vacantCount = 128 - ground700?.length;
+    }
+    if (item.price === 600) {
+      item.bookedCount = stall600?.length;
+      item.vacantCount = 110 - stall600?.length;
+    }
+    if (item.price === 500) {
+      item.bookedCount = stall500?.length;
+      item.vacantCount = 124 - stall500?.length;
+    }
+    if (item.price === 250) {
+      item.bookedCount = balcony250?.length;
+      item.vacantCount = 171 - balcony250?.length;
+    }
+  });
+  console.log(tableData);
+  table.innerHTML += ` <tr>
+                        <th>Floor type</th>
+                        <th>Rows</th>
+                        <th>Price(₹)</th>
+                        <th>Booked</th>
+                        <th>Available</th>
+                    </tr>`;
+
+  tableData.map((t) => {
+    table.innerHTML += `<tr><td>${t.floorType}</td>
+    <td>${t.rows}</td>
+    <td>${t.price}</td>
+    <td>${t?.bookedCount}</td>
+    <td>${t?.vacantCount}</td></tr>`;
+  });
+}
+
 function renderAuditorium(bookedSeats) {
   const totalSeats = 665;
 
-  displayBookedCount.innerHTML += " - " + bookedSeats.length + " Seats";
+  displayBookedCount.innerHTML += " → " + bookedSeats.length + " Seats";
 
   displayAvailableCount.innerHTML +=
-    " - " + parseInt(totalSeats - bookedSeats.length) + " Seats";
+    "→" + parseInt(totalSeats - bookedSeats.length) + " Seats";
 
   rows.forEach(({ row, seats, price }) => {
     const rowDiv = document.createElement("div");
