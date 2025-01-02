@@ -1,8 +1,12 @@
+
+
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
+
 }
 main{
   display: flex;
@@ -19,7 +23,7 @@ main{
   gap: 10px;
   width: 100%;
   margin: 20px;
-  /* max-width: 800px; */
+
 }
 
 .stage{
@@ -60,6 +64,8 @@ main{
   flex-wrap: nowrap;
 }
 
+
+
 .seat {
   width: 25px;
   height: 25px;
@@ -71,6 +77,12 @@ main{
   position: relative;
   font-size: 12px;
   color: white;
+  font-weight: bolder;
+
+}
+
+.seat:hover{
+  transform: scale(1.5,1.5);
 }
 
 .seat.vacant {
@@ -155,18 +167,29 @@ td,th{
  font-family: Georgia, 'Times New Roman', Times, serif;
  font-size: x-large;
 }
-#loader {
-  display: none;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 1s linear infinite;
-  animation: spin 1s linear infinite;
+
   
+  
+
+
+
+#loader {
+  margin-left: 50vw;
+  width: 100px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: 
+    conic-gradient(#0000 10%,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  animation: l3 0.5s infinite linear;
 }
+@keyframes l3 {to{transform: rotate(1turn)}}
 
 .date-time{
   display: flex;

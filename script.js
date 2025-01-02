@@ -21,25 +21,25 @@ const rows = [
 ];
 
 const extraSpaceConfig = {
-  A: [9, 15],
-  B: [9, 16],
-  C: [10, 17],
-  D: [10, 18],
-  E: [10, 18],
-  F: [11, 20],
-  G: [11, 20],
-  H: [11, 21],
-  I: [12, 22],
-  J: [12, 23],
-  K: [13, 24],
-  L: [13, 25],
-  M: [14, 27],
-  N: [14, 27],
-  O: [15, 27],
-  P: [14, 26],
-  Q: [14, 27],
-  R: [15, 28],
-  S: [15, 28],
+  A: [10, 16],
+  B: [10, 17],
+  C: [11, 18],
+  D: [11, 19],
+  E: [11, 19],
+  F: [12, 21],
+  G: [12, 21],
+  H: [12, 22],
+  I: [13, 23],
+  J: [13, 24],
+  K: [14, 25],
+  L: [14, 26],
+  M: [15, 28],
+  N: [15, 28],
+  O: [16, 28],
+  P: [15, 27],
+  Q: [15, 28],
+  R: [16, 29],
+  S: [16, 29],
 };
 
 const tableData = [
@@ -86,7 +86,7 @@ const dateTime = document.querySelector(".date-time");
 
 async function getBookedSeats() {
   try {
-    loader.style.display = "block";
+    loader.style.display = "flex";
     bookingContainer.style.display = "none";
 
     bookedSeats = await fetchData();
